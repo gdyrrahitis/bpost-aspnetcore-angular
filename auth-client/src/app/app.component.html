@@ -1,0 +1,6 @@
+<nav *ngIf="!isInLogin()" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['/']">Home</a>
+    <a *ngIf="!isAuthenticated()" class="nav-item nav-link active" [routerLink]="['/login']">Login</a>
+    <a *ngIf="isAuthenticated()" class="nav-item nav-link active" (click)="logout()" href="javascript:void(0)">Logout</a>
+</nav>
+<router-outlet></router-outlet>
