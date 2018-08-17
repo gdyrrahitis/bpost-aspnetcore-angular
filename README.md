@@ -1,1 +1,1 @@
-# ASP.NET Core authentication - Securing Angular client using JWT bearer tokens
+# Build a secure Angular client using ASP.NET Core and OAuth
