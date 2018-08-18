@@ -16,5 +16,4 @@ export class PetsComponent implements OnInit {
       this.pets = data;
     });
   }
-
 }

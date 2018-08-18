@@ -13,10 +13,6 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './auth.guard';
 import { AuthInterceptor } from './auth-interceptor';
 
-export function tokenGetter() {
-  return localStorage.getItem('access_token');
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +27,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter
+        tokenGetter: () => localStorage.getItem('token')
       }
     })
   ],

@@ -22,11 +22,13 @@ export class AuthService {
 
     return this.http.post<any>(this.url, body.toString(), {
       headers: headers
-    }).pipe(map(jwt => {
-      if (jwt && jwt.access_token) {
-        localStorage.setItem('token', JSON.stringify(jwt))
-      }
-    }));
+    }).pipe(
+      map(jwt => {
+        if (jwt && jwt.access_token) {
+          localStorage.setItem('token', JSON.stringify(jwt))
+        }
+      })
+    );
   }
 
   isAuthenticated() {
@@ -35,7 +37,7 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return this.jwtHelper.tokenGetter();
   }
 
   logout() {

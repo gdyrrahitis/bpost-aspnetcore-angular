@@ -7,7 +7,6 @@
     using System.Security.Claims;
     using IdentityServer4.Models;
     using IdentityServer4.Test;
-    using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
     public class Startup
     {
@@ -17,7 +16,8 @@
                 .AddDeveloperSigningCredential()
                 .AddInMemoryApiResources(new List<ApiResource>
                 {
-                    new ApiResource("resource.server.api")
+                    new ApiResource("resource.server.api",
+                        new [] { ClaimTypes.Name, ClaimTypes.Email})
                 })
                 .AddInMemoryClients(new List<Client>
                 {
@@ -40,6 +40,7 @@
                         Password = "1234",
                         Claims = new List<Claim>
                         {
+                            new Claim(ClaimTypes.Name, "Test User"),
                             new Claim(ClaimTypes.Email, "email@mail.com")
                         }
                     }
@@ -53,7 +54,6 @@
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseIdentityServer();
         }
     }
